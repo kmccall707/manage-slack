@@ -93,7 +93,7 @@ def report_to_csv(user_report):
 
 def main():
     _parser, args = parse_args()
-    slack_token = "xoxp-1007626892624-1007668785253-1062648276807-f28c657a2a81ad6f2472a29dae5909d3"
+    slack_token = ""
 
     if not slack_token:
         print('You need to set the slack_token variable, see the readme file')
