@@ -44,6 +44,8 @@ def get_users(client):
             continue
         user_report[user['real_name']] = { 
             'id': user['id'],
+            'username': user['name'], 
+            'email': user.get('profile', {}).get('email'),
             'time': 0 
             }
     return(user_report)
@@ -60,7 +62,9 @@ def user(client, member_name):
             continue
         if user['real_name'] == member_name:
             user_dict[user['real_name']] = {
-                'id': user['id']
+                'id': user['id'],
+                'username': user['name'],
+                'email': user['']
             }
     return(user_dict)
 
@@ -124,14 +128,18 @@ def report_to_csv(user_report):
         if data['time'] == 0:
             status.append({
                 "member_name": uid,
+                "username": data["username"],
+                "email": data["email"],
                 "status": "inactive"
             })
         else:
             status.append({
                 "member_name": uid,
+                "username": data["username"],
+                "email": data["email"],
                 "status": "active"
             })
-        csv_columns = ['member_name', 'status']
+        csv_columns = ['member_name', 'username', 'email', 'status']
         with open('member_status.csv', 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
             writer.writeheader()
